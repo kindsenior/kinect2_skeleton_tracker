@@ -41,6 +41,9 @@
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>kinect2_skeleton_tracker_win</build_depend>
+  <buildtool_depend>libzmq3-dev</buildtool_depend>
+  <buildtool_depend>roscpp</buildtool_depend>
+
   <run_depend>kinect2_skeleton_tracker_win</run_depend>
 
 
