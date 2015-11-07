@@ -1,0 +1,21 @@
+<launch>
+  <node name="kinect2_skeleton_tracker" pkg="kinect2_skeleton_tracker" type="kinect2_skeleton_tracker"/>
+
+  <node name="map_openni_camera" pkg="tf" type="static_transform_publisher"
+        args="0 0 1.5 0 0 0 /map /openni_link 100" />
+
+  <node name="openni_link_depth_frame" pkg="tf" type="static_transform_publisher"
+        args="0 -0.02 0 0 0 0 /openni_link /openni_depth_frame 100" />
+
+  <sphinxdoc><![CDATA[
+This scripts start kinect node,
+
+Checked with openni_kinect version 0.3.1, to get verrsion number, use `rosversion openni_kinect`
+
+.. code-block:: bash
+
+  rosrun roseus roseus `rospack find roseus_tutorials`/src/kinect-model-viewer.l "(test-kinect)"
+
+  ]]></sphinxdoc>
+</launch>
+

@@ -1,0 +1,49 @@
+<launch>
+  <!-- <include file="$(find openni_launch)/launch/openni.launch"> -->
+  <!--   <arg name="respawn" value="true"/> -->
+  <!--   <arg name="publish_tf" value="true"/> -->
+  <!--   <arg name="camera" value="openni"/> -->
+  <!--   <arg name="depth_registration" value="true" /> -->
+    <!-- subsample 1/(N+1) -->
+    <!--param name="/camera/driver/data_skip" value="1" /-->
+    <!-- 320x240/30Hz --> <!-- see rqt_reconfigure -->
+    <!--param name="/camera/driver/depth_mode" value="5" /-->
+    <!-- 320x240/30Hz -->
+    <!--param name="/camera/driver/image_mode" value="5" /-->
+	<!-- 	<arg name="rgb_processing"                  value="false"/> -->
+	<!-- 	<arg name="ir_processing"                   value="false"/> -->
+	<!-- 	<arg name="depth_processing"                value="false"/> -->
+	<!-- 	<arg name="depth_registered_processing"     value="false"/> -->
+	<!-- 	<arg name="disparity_processing"            value="false"/> -->
+	<!-- 	<arg name="disparity_registered_processing" value="false"/> -->
+	<!-- 	<arg name="hw_registered_processing"        value="false" /> -->
+	<!-- 	<arg name="sw_registered_processing"        value="false" /> -->
+	<!-- 	<arg name="load_driver"                     value="false"/> -->
+
+  <!-- </include> -->
+
+  <!-- <node name="openni_tracker" pkg="openni_tracker" type="openni_tracker" -->
+  <!--       output="screen" respawn="true" > -->
+  <!--   <param name="camera_frame_id" value="openni_depth_frame"/> -->
+  <!-- </node> -->
+  <node name="map_openni_camera" pkg="tf" type="static_transform_publisher"
+        args="0 0 1.5 0 0 0 /map /openni_link 100" />
+
+  <node name="openni_link_depth_frame" pkg="tf" type="static_transform_publisher"
+        args="0 -0.02 0 0 0 0 /openni_link /openni_depth_frame 100" />
+
+  <sphinxdoc><![CDATA[
+This scripts start kinect node,
+
+Checked with openni_kinect version 0.3.1, to get verrsion number, use `rosversion openni_kinect`
+
+.. code-block:: bash
+
+  rosrun roseus roseus `rospack find roseus_tutorials`/src/kinect-model-viewer.l "(test-kinect)"
+
+  (jsk internal user only) roseus "(jsk)" "(rbrain)" kinect-model-viewer.l "(hrp2jsk-simple)" "(test-kinect :robot *hrp2*)"
+
+to control hrp2 robot from kinect captured skelton image
+  ]]></sphinxdoc>
+</launch>
+
