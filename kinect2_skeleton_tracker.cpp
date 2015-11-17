@@ -111,14 +111,26 @@ int main(int argc, char **argv)
           tf::Transform transform;
 					transform.setOrigin(tf::Vector3(0,0,0));
           transform.setRotation(tf::Quaternion(coordinate1.q.x, coordinate1.q.y, coordinate1.q.z, coordinate1.q.w));
-					if( linkName.find("hip_") != string::npos || linkName.find("knee_") != string::npos || linkName.find("foot_") != string::npos ){
+          if( linkName.find("torso_") != string::npos || linkName.find("chest_") != string::npos ){
+              tf::Transform tmp_tf(tf::Matrix3x3(-1,0,0, 0,1,0, 0,0,-1));
+              transform = transform * tmp_tf;
+          }else if( linkName.find("right_hip_") != string::npos || linkName.find("right_knee_") != string::npos || linkName.find("right_foot_") != string::npos ){
               tf::Transform tmp_tf(tf::Matrix3x3(0,0,-1, 0,-1,0, -1,0,0));
               transform = transform * tmp_tf;
-					}else if( linkName.find("left_shoulder_") != string::npos || linkName.find("left_elbow_") != string::npos || linkName.find("left_hand_") != string::npos ){
-              tf::Transform tmp_tf(tf::Matrix3x3(0,-1,0, 1,0,0, 0,0,1));
+          }else if( linkName.find("left_hip_") != string::npos || linkName.find("left_knee_") != string::npos || linkName.find("left_foot_") != string::npos ){
+              tf::Transform tmp_tf(tf::Matrix3x3(0,0,1, 0,-1,0, 1,0,0));
               transform = transform * tmp_tf;
+					// }else if( linkName.find("left_shoulder_") != string::npos || linkName.find("left_elbow_") != string::npos || linkName.find("left_hand_") != string::npos ){
+              // tf::Transform tmp_tf(tf::Matrix3x3(0,-1,0, 1,0,0, 0,0,1));
 					}else if( linkName.find("right_shoulder_") != string::npos || linkName.find("right_elbow_") != string::npos || linkName.find("right_hand_") != string::npos ){
-              tf::Transform tmp_tf(tf::Matrix3x3(0,1,0, -1,0,0, 0,0,1));
+              // tf::Transform tmp_tf(tf::Matrix3x3(0,1,0, -1,0,0, 0,0,1));
+              tf::Transform tmp_tf(tf::Matrix3x3(0,0,1, -1,0,0, 0,-1,0));
+              transform = transform * tmp_tf;
+					// }else if( linkName.find("right_shoulder_") != string::npos || linkName.find("right_elbow_") != string::npos || linkName.find("right_hand_") != string::npos ){
+              // tf::Transform tmp_tf(tf::Matrix3x3(0,1,0, -1,0,0, 0,0,1));
+					}else if( linkName.find("left_shoulder_") != string::npos || linkName.find("left_elbow_") != string::npos || linkName.find("left_hand_") != string::npos ){
+              // tf::Transform tmp_tf(tf::Matrix3x3(0,-1,0, 1,0,0, 0,0,1));
+              tf::Transform tmp_tf(tf::Matrix3x3(0,0,1, 1,0,0, 0,1,0));
               transform = transform * tmp_tf;
 					}
 					transform.setOrigin(tf::Vector3(coordinate1.p.x, coordinate1.p.y, coordinate1.p.z));
