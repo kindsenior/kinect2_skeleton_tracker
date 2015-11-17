@@ -55,7 +55,10 @@ int main(int argc, char **argv)
   bool flg = true;
   std::map<std::string, point> jointPosMap;
 
-  ros::Rate loop_rate(30);
+  // ros::Rate loop_rate(30);
+  // ros::Rate loop_rate(45);// 何故か45fps
+  ros::Rate loop_rate(60);// 何故か45fps
+
   int i = 0;
   while (ros::ok()){
       // // サービス
